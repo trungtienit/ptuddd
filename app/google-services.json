@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "555906887868",
+    "firebase_url": "https://theflashquiz-252e1.firebaseio.com",
+    "project_id": "theflashquiz-252e1",
+    "storage_bucket": "theflashquiz-252e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555906887868:android:f70fefc15b733ace",
+        "android_client_info": {
+          "package_name": "com.example.trantien.theflashquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555906887868-80ppcqjmmauq2mnt6rftkgbcehpplnvd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trantien.theflashquiz",
+            "certificate_hash": "f7d1dda2c5a3536ac4e0c987fa6d68520632a2ce"
+          }
+        },
+        {
+          "client_id": "555906887868-ttjsn6os5faobrhmgetspq31m3u2lqt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN79McJcYsp-SAz0pZuExuZvQajoq4YmA"
+        },
+        {
+          "current_key": "AIzaSyDN79McJcYsp-SAz0pZuExuZvQajoq4YmA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555906887868-ttjsn6os5faobrhmgetspq31m3u2lqt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

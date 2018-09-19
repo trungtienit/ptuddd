@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TheFlashQuiz</string>
+    <string name="facebook_app_id">759224067743011</string>
+    <string name="fb_login_protocol_scheme">fb759224067743011</string>
+
+    <string name="loading">Loading…</string>
+    <string name="txt_splash">IT\\\'S TIME TO QUIZ !</string>
+    <string name="chats_heading">Messages</string>
+    <string name="hint_typing">Type here</string>
+    <string name="send_text">Send</string>
 </resources>
