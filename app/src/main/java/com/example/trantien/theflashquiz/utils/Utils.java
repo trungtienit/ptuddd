@@ -6,11 +6,12 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Created by saksham on 25/6/17.
+ * Created by Zuka on 9/18/18.
  */
-
 public class Utils {
     public static String EXTRA_ROOM_NAME="EXTRA_ROOM_NAME";
+    public static String KEY_FIREBASE="FROM_FIREBASE";
+    public static String KEY_ANONYMOUS="FROM _ANONYMOUS";
 
     public static String convertTime(long timestamp) {
         Calendar c = Calendar.getInstance();

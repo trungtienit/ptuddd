@@ -12,15 +12,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by saksham on 26/6/17.
+ * Created by Zuka on 9/18/18.
  */
-
 public class FirebaseManager implements ChildEventListener {
     private volatile static FirebaseManager sFirebaseManager;
     private DatabaseReference mMessageReference;
     private FirebaseCallBacks mCallbacks;
 
-    public static synchronized FirebaseManager getInstance(String roomName, FirebaseCallBacks callBacks) {
+    public static FirebaseManager getInstance(String roomName, FirebaseCallBacks callBacks) {
         if(sFirebaseManager == null) {
             synchronized (FirebaseManager.class) {
                 sFirebaseManager = new FirebaseManager(roomName,callBacks);
@@ -69,7 +68,7 @@ public class FirebaseManager implements ChildEventListener {
 
     public void sendMessageToFirebase(String message) {
         Map<String,Object> map=new HashMap<>();
-        map.put("text",message);
+        map.put("content",message);
         map.put("time", System.currentTimeMillis());
         map.put("senderId", FirebaseAuth.getInstance().getCurrentUser().getUid());
 

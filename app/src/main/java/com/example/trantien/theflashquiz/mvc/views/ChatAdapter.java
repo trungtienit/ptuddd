@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.trantien.theflashquiz.R;
-import com.example.trantien.theflashquiz.mvc.models.ChatPojo;
+import com.example.trantien.theflashquiz.mvc.models.ChatModel;
 import com.example.trantien.theflashquiz.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,12 +23,12 @@ import java.util.ArrayList;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.FollowerViewHolder> {
 
 
-    private ArrayList<ChatPojo> chatList;
+    private ArrayList<ChatModel> chatList;
     private Context context;
 
-    public ChatAdapter(Context context, ArrayList<ChatPojo> chatList) {
-        this.chatList =chatList;
+    public ChatAdapter(Context context, ArrayList<ChatModel> messages) {
         this.context=context;
+        this.chatList=messages;
     }
 
     @Override
@@ -63,7 +63,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.FollowerViewHo
     public int getItemCount() {
         return chatList.size();
     }
-
 
     class FollowerViewHolder extends RecyclerView.ViewHolder {
 

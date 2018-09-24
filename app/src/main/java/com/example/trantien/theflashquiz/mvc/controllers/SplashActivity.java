@@ -13,6 +13,8 @@ import com.example.trantien.theflashquiz.R;
 
 import java.io.InputStream;
 
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_ANONYMOUS;
+
 /**
  * Created by Zuka on 9/18/18.
  */
@@ -76,7 +78,11 @@ public class SplashActivity extends Activity {
     }
 
     public void startMainScreen() {
+        Intent i = getIntent();
+        String key = i.getExtras().getString(KEY_ANONYMOUS);
+
         Intent inst = new Intent(this, HomeActivity.class);
+        inst.putExtra(KEY_ANONYMOUS, key);
         inst.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(inst);
 

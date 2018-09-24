@@ -1,0 +1,16 @@
+<com.rom4ek.arcnavigationview.ArcNavigationView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_view"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:arc_cropDirection="cropInside"
+    app:arc_width="96dp"
+    app:headerLayout="@layout/nav_header"
+    app:itemBackground="@android:color/white"
+    app:menu="@menu/activity_main_drawer" />
+

@@ -26,6 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_ANONYMOUS;
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_FIREBASE;
+
 /**
  * Created by Zuka on 9/18/18.
  */
@@ -48,7 +51,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        unbinder = ButterKnife.bind(this);
+        mBinder = ButterKnife.bind(this);
 
         //Set listener
         cvFacebookLogin.setOnClickListener(this);
@@ -130,7 +133,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -145,15 +147,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
-            gotoHome();
+            gotoHome(KEY_FIREBASE);
         } else {
             System.out.println("firebaseUser null");
 
         }
     }
 
-    private void gotoHome() {
+    private void gotoHome(String keyFrom) {
         Intent intent= new Intent(getApplicationContext(),SplashActivity.class);
+        intent.putExtra(KEY_ANONYMOUS, keyFrom);
         startActivity(intent);
         finish();
     }
@@ -169,12 +172,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            showToast("Firebase authentication failed, please check your internet connection");
-                            hideProgressDialog();
+                            showToast("Anonymous authentication failed, please check your internet connection");
                         } else {
-                            hideProgressDialog();
-                            gotoHome();
+                            gotoHome(KEY_ANONYMOUS);
                         }
+                        hideProgressDialog();
                     }
 
                 });

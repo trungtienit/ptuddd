@@ -8,4 +8,11 @@
     <string name="chats_heading">Messages</string>
     <string name="hint_typing">Type here</string>
     <string name="send_text">Send</string>
+
+    // facebook
+    <string name="name">name</string>
+    <string name="id">id</string>
+    <string name="email">email</string>
+    <string name="fields">fields</string>
+    <string name="fields_name">id,name,email</string>
 </resources>

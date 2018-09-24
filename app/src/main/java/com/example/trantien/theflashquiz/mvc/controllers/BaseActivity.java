@@ -17,7 +17,7 @@ import butterknife.Unbinder;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    protected Unbinder unbinder;
+    protected Unbinder mBinder;
     public ProgressDialog mProgressDialog;
 
     public void showProgressDialog() {
@@ -51,11 +51,12 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unbinder.unbind();
+        if (mBinder != null)
+            mBinder.unbind();
         super.onDestroy();
     }
 
-    protected void showToast( String str) {
+    protected void showToast(String str) {
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }
 

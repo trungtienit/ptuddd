@@ -1,51 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mvc.controllers.HomeActivity">
+    tools:context=".mvc.controllers.HomeActivity"
+    android:id="@+id/drawer"
+    tools:openDrawer="start">
 
-    <TextView
-        android:id="@+id/text_header"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:text="@string/chats_heading"
-        style="@style/activity_headers"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <TextView
+            android:id="@+id/text_header"
+            style="@style/activity_headers"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/layout_input">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="45dp"
+            android:text="@string/chats_heading" />
 
-        <LinearLayout
-            android:id="@+id/layout_input"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            style="@style/regular_layouts">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/edittext_chat_message"
-                android:layout_width="0dp"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:hint="@string/hint_typing"
-                android:layout_marginRight="@dimen/margin_average"
-                style="@style/regular_editTexts"/>
-            <Button
-                android:id="@+id/button_send_message"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:text="@string/send_text"
-                style="@style/regular_buttons"/>
-        </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+                android:layout_above="@+id/layout_input"/>
+
+            <LinearLayout
+                android:id="@+id/layout_input"
+                style="@style/regular_layouts"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edittext_chat_message"
+                    style="@style/regular_editTexts"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_average"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_typing" />
+
+                <Button
+                    android:id="@+id/button_send_message"
+                    style="@style/regular_buttons"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:onClick="sendMessage"
+                    android:text="@string/send_text" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.rom4ek.arcnavigationview.ArcNavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        app:arc_cropDirection="cropInside"
+        app:arc_width="96dp"
+        app:headerLayout="@layout/nav_header"
+        app:itemBackground="@android:color/white"
+        app:menu="@menu/activity_main_drawer" />
+</android.support.v4.widget.DrawerLayout>
