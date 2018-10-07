@@ -1,6 +1,7 @@
 package com.example.trantien.theflashquiz.mvc.controllers;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.trantien.theflashquiz.R;
 
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -30,6 +32,9 @@ public class BaseActivity extends AppCompatActivity {
         mProgressDialog.show();
     }
 
+    protected void bind(Activity activity){
+        mBinder= ButterKnife.bind(activity);
+    }
     public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();

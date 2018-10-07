@@ -23,5 +23,6 @@
     <color name="dark_grey">#4e4d4d</color>
     <color name="bg_color">#ecf0f1</color>
     <color name="black">#000000</color>
+    <color name="White">#fff</color>
 
 </resources>

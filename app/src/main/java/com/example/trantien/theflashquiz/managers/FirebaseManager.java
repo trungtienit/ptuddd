@@ -20,24 +20,24 @@ public class FirebaseManager implements ChildEventListener {
     private FirebaseCallBacks mCallbacks;
 
     public static FirebaseManager getInstance(String roomName, FirebaseCallBacks callBacks) {
-        if(sFirebaseManager == null) {
+        if (sFirebaseManager == null) {
             synchronized (FirebaseManager.class) {
-                sFirebaseManager = new FirebaseManager(roomName,callBacks);
+                sFirebaseManager = new FirebaseManager(roomName, callBacks);
             }
         }
         return sFirebaseManager;
     }
 
-    private FirebaseManager(String roomName, FirebaseCallBacks callBacks){
+    private FirebaseManager(String roomName, FirebaseCallBacks callBacks) {
         mMessageReference = FirebaseDatabase.getInstance().getReference().child(roomName);
-        this.mCallbacks =callBacks;
+        this.mCallbacks = callBacks;
     }
 
-    public void addMessageListeners(){
+    public void addMessageListeners() {
         mMessageReference.addChildEventListener(this);
     }
 
-    public void removeListeners(){
+    public void removeListeners() {
         mMessageReference.removeEventListener(this);
     }
 
@@ -67,17 +67,16 @@ public class FirebaseManager implements ChildEventListener {
     }
 
     public void sendMessageToFirebase(String message) {
-        Map<String,Object> map=new HashMap<>();
-        map.put("content",message);
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", message);
         map.put("time", System.currentTimeMillis());
         map.put("senderId", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        String keyToPush= mMessageReference.push().getKey();
+        String keyToPush = mMessageReference.push().getKey();
         mMessageReference.child(keyToPush).setValue(map);
     }
-
     public void destroy() {
-        sFirebaseManager=null;
-        mCallbacks =null;
+        sFirebaseManager = null;
+        mCallbacks = null;
     }
 }

@@ -64,4 +64,42 @@
     <dimen name="small_font_size">16sp</dimen>
     <dimen name="padding_small">5dp</dimen>
     <dimen name="max_chat_width">180dp</dimen>
+
+    <style name="dialog_header">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/small_font_size</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dialog_info">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/small_font_size</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">@dimen/padding_average</item>
+    </style>
+
+
+    <style name="myDialog" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
+    <style name="style_question">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="button">
+        <item name="android:textSize">@dimen/small_font_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/five_dimen</item>
+        <item name="android:paddingRight">@dimen/five_dimen</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
 </resources>

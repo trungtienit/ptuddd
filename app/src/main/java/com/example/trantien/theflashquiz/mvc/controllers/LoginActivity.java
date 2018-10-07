@@ -24,10 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_ANONYMOUS;
-import static com.example.trantien.theflashquiz.utils.Utils.KEY_FIREBASE;
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_FACEBOOK;
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_TYPE_USER;
 
 /**
  * Created by Zuka on 9/18/18.
@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mBinder = ButterKnife.bind(this);
+        bind(this);
 
         //Set listener
         cvFacebookLogin.setOnClickListener(this);
@@ -63,7 +63,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
         btnloginFacebook = findViewById(R.id.btn_facebook_login);
-        btnloginFacebook.setReadPermissions("email", "public_profile");
+        //btnloginFacebook.setReadPermissions("email", "public_profile");
         btnloginFacebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -117,7 +117,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 });
     }
-
     public void signOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
@@ -147,7 +146,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
-            gotoHome(KEY_FIREBASE);
+            if(user.isAnonymous()){
+                gotoHome(KEY_ANONYMOUS);
+            }else {
+                gotoHome(KEY_FACEBOOK);
+            }
         } else {
             System.out.println("firebaseUser null");
 
@@ -156,7 +159,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void gotoHome(String keyFrom) {
         Intent intent= new Intent(getApplicationContext(),SplashActivity.class);
-        intent.putExtra(KEY_ANONYMOUS, keyFrom);
+        intent.putExtra(KEY_TYPE_USER, keyFrom);
         startActivity(intent);
         finish();
     }

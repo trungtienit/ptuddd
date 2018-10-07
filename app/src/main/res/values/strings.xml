@@ -15,4 +15,15 @@
     <string name="email">email</string>
     <string name="fields">fields</string>
     <string name="fields_name">id,name,email</string>
+    <string name="create_room_label">Create room</string>
+    <string name="existing_room_label">Enter existing</string>
+    <string name="room_dialog_heading">Enter room name</string>
+    <string name="dialog_room_info">Tien dep trai</string>
+    <string name="hint_room_name">room here</string>
+    <string name="text_submit">Submit</string>
+    <string name="start_text">Start</string>
+    <string name="room_heading">Room</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

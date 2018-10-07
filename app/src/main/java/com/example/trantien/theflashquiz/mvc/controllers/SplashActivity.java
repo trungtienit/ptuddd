@@ -10,10 +10,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.trantien.theflashquiz.R;
+import com.victor.loading.newton.NewtonCradleLoading;
 
 import java.io.InputStream;
 
-import static com.example.trantien.theflashquiz.utils.Utils.KEY_ANONYMOUS;
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_TYPE_USER;
 
 /**
  * Created by Zuka on 9/18/18.
@@ -34,6 +35,11 @@ public class SplashActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         txtText = findViewById(R.id.txtText);
+
+        NewtonCradleLoading newtonCradleLoading;
+        newtonCradleLoading =findViewById(R.id.newton_cradle_loading);
+        newtonCradleLoading.start();
+        newtonCradleLoading.setLoadingColor(R.color.colorPrimary);
 
         Thread t = new Thread() {
             @Override
@@ -74,18 +80,16 @@ public class SplashActivity extends Activity {
         };
         splshThread.start();
 
-
     }
 
     public void startMainScreen() {
         Intent i = getIntent();
-        String key = i.getExtras().getString(KEY_ANONYMOUS);
+        String key = i.getExtras().getString(KEY_TYPE_USER);
 
         Intent inst = new Intent(this, HomeActivity.class);
-        inst.putExtra(KEY_ANONYMOUS, key);
+        inst.putExtra(KEY_TYPE_USER, key);
         inst.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(inst);
-
     }
 
     @Override
