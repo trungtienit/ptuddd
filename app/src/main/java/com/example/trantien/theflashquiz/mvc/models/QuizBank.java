@@ -7,22 +7,22 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Zuka on 9/25/18.
  */
-public class QuestionBank extends RealmObject {
+public class QuizBank extends RealmObject {
     @PrimaryKey
     private String id;
     private String owner;
     private String topic;
-    private RealmList<Question> questions;
+    private RealmList<QuizModel> quizModels;
 
-    public QuestionBank() {
+    public QuizBank() {
     }
 
-    public QuestionBank(String id, String owner, String topic, RealmList<Question> questions) {
+    public QuizBank(String id, String owner, String topic, RealmList<QuizModel> quizModels) {
         this.id = id;
         this.owner = owner;
         this.topic = topic;
 
-        this.questions = questions;
+        this.quizModels = quizModels;
     }
 
     public String getId() {
@@ -37,15 +37,15 @@ public class QuestionBank extends RealmObject {
         return topic;
     }
 
-    public RealmList<Question> getQuestions() {
-        return questions;
+    public RealmList<QuizModel> getQuizModels() {
+        return quizModels;
     }
 
     static class Builder {
         private String id;
         private String owner;
         private String topic;
-        private RealmList<Question> questions;
+        private RealmList<QuizModel> quizModels;
 
         public Builder() {
             this.id = "";
@@ -68,13 +68,13 @@ public class QuestionBank extends RealmObject {
             return this;
         }
 
-        public Builder Questions(RealmList<Question> questions) {
-            this.questions = questions;
+        public Builder Questions(RealmList<QuizModel> quizModels) {
+            this.quizModels = quizModels;
             return this;
         }
 
-        public QuestionBank create() {
-            return new QuestionBank(id, owner, topic, questions);
+        public QuizBank create() {
+            return new QuizBank(id, owner, topic, quizModels);
         }
     }
 

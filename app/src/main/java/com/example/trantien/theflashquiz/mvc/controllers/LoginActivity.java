@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.trantien.theflashquiz.R;
+import com.example.trantien.theflashquiz.utils.Utils;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -27,6 +28,7 @@ import butterknife.BindView;
 
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_ANONYMOUS;
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_FACEBOOK;
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_SIGNOUT;
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_TYPE_USER;
 
 /**
@@ -52,13 +54,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         bind(this);
-
-        //Set listener
-        cvFacebookLogin.setOnClickListener(this);
-        // [START initialize_auth]
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+        String key = getIntent().getExtras().getString(Utils.KEY_LOGIN,Utils.KEY_LOGIN);
+        if(key.equals(KEY_SIGNOUT))
+            signOut();
+        //Set listener
+        cvFacebookLogin.setOnClickListener(this);
+        // [START initialize_auth]
+
 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
@@ -120,8 +125,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void signOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
-
-        updateUI(null);
     }
 
     @Override

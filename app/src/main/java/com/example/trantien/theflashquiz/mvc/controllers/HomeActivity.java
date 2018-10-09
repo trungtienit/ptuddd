@@ -4,27 +4,20 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.trantien.theflashquiz.R;
 import com.example.trantien.theflashquiz.managers.Prefs;
 import com.example.trantien.theflashquiz.managers.RealmManager;
-import com.example.trantien.theflashquiz.mvc.models.QuestionBank;
-import com.example.trantien.theflashquiz.mvc.models.QuestionBankWrapper;
+import com.example.trantien.theflashquiz.mvc.models.QuizBank;
+import com.example.trantien.theflashquiz.mvc.models.QuizBankWrapper;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -49,13 +42,7 @@ import static com.example.trantien.theflashquiz.utils.Utils.KEY_TYPE_USER;
 /**
  * Created by Zuka on 9/18/18.
  */
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
-    @BindView(R.id.navigation_view)
-    NavigationView navigationView;
-
-    @BindView(R.id.drawer)
-    DrawerLayout drawer;
+public class HomeActivity extends DrawerActivity implements View.OnClickListener {
 
     @BindView(R.id.btn_create_room)
     Button btnCreateRoom;
@@ -63,9 +50,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.btn_find_room)
     Button btnFindRoom;
 
-    private ImageView imvAvatar;
-    private TextView tvName;
-    private TextView tvMail;
     private String key;
     private Dialog mDialog;
     ArrayList<String> mItems;
@@ -74,18 +58,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        addContentView(R.layout.activity_home);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        bind(this);
-
-        navigationView.setNavigationItemSelectedListener(this);
-        imvAvatar = navigationView.getHeaderView(0).findViewById(R.id.imageView);
-        tvName = navigationView.getHeaderView(0).findViewById(R.id.tv_name);
-        tvMail = navigationView.getHeaderView(0).findViewById(R.id.tv_email);
-
+        setTitle("HIHI");
         btnCreateRoom.setOnClickListener(this);
         btnFindRoom.setOnClickListener(this);
-
         Intent intent = getIntent();
         key = intent.getExtras().getString(KEY_TYPE_USER, KEY_ANONYMOUS);
         init();
@@ -93,12 +70,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void init() {
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-//          chatAdapter = new ChatAdapter(this, mModel.getMessages());
-//        mRecyclerView.setAdapter(chatAdapter);
-//        mRecyclerView.scrollToPosition(mModel.getMessages().size() - 1);
-
         mRealm = RealmManager.getInstance();
 
         if (!Prefs.with(this).getPreLoad()) {
@@ -109,8 +80,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void setRealmData() {
         // generate original data
-        for(QuestionBank questionBank: QuestionBankWrapper.getAllQuestionBank())
-          mRealm.addQuestionBank(questionBank);
+        for(QuizBank quizBank : QuizBankWrapper.getAllQuestionBank())
+          mRealm.addQuestionBank(quizBank);
         Prefs.with(this).setPreLoad(true);
     }
 
@@ -125,7 +96,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
         if (mItems == null) {
             mItems = new ArrayList<>();
-            RealmResults<QuestionBank> data = mRealm.getQuestionBanks();
+            RealmResults<QuizBank> data = mRealm.getQuestionBanks();
             for (int i = 0; i< data.size(); i++){
                 mItems.add(data.get(i).getId());
             }
@@ -178,39 +149,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
-    @Override
-    public void onBackPressed() {
-
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
     private void updateUI() {
         if (key.equals(KEY_FACEBOOK)) {
             showProgressDialog();
@@ -245,14 +183,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
-    private void updateInfor(String imageURL, String name, String email) {
-        Glide.with(this)
-                .load(imageURL)
-                .into(imvAvatar);
-        tvName.setText(name);
-        tvMail.setText(email);
-    }
-
     public URL extractFacebookIcon(String id) {
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
@@ -264,6 +194,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             return imageURL;
         } catch (Throwable e) {
             return null;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 

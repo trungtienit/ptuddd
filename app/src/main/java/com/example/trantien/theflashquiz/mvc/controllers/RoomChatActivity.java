@@ -32,7 +32,7 @@ import static com.example.trantien.theflashquiz.utils.Utils.createNewRoomWith;
 /**
  * Created by Zuka on 9/18/18.
  */
-public class RoomChatActivity extends BaseActivity implements MessageCallBacks, FirebaseCallBacks, View.OnClickListener {
+public class RoomChatActivity extends DrawerActivity implements MessageCallBacks, FirebaseCallBacks, View.OnClickListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -49,8 +49,8 @@ public class RoomChatActivity extends BaseActivity implements MessageCallBacks, 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        addContentView(R.layout.activity_room_chat);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_chat);
 
         bind(this);
 

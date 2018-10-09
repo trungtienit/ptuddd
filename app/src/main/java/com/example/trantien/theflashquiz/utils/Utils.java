@@ -10,6 +10,8 @@ import java.util.TimeZone;
 public class Utils {
     public static final int REQUEST_SCORE = 0;
 
+    public static final String KEY_LOGIN ="LOGIN";
+    public static final String KEY_SIGNOUT ="SIGNOUT";
     public static final String KEY_FACEBOOK ="FACEBOOK";
     public static final String KEY_ANONYMOUS="ANONYMOUS";
     public static final String KEY_TYPE_USER="TYPE_USER";
@@ -40,4 +42,5 @@ public class Utils {
     public static String sendMyResult(String result) {
         return KEY_RETURN_SCORE +result;
     }
+
 }

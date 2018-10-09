@@ -13,11 +13,9 @@ import android.transition.TransitionSet;
 
 import com.example.trantien.theflashquiz.R;
 import com.example.trantien.theflashquiz.managers.RealmManager;
-import com.example.trantien.theflashquiz.mvc.models.QuestionBank;
+import com.example.trantien.theflashquiz.mvc.models.PojoModel;
+import com.example.trantien.theflashquiz.mvc.models.QuizBank;
 import com.example.trantien.theflashquiz.utils.Utils;
-
-import butterknife.ButterKnife;
-import io.realm.RealmResults;
 
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_QUESTION_BANK_ID;
 
@@ -26,7 +24,6 @@ import static com.example.trantien.theflashquiz.utils.Utils.KEY_QUESTION_BANK_ID
  */
 public class PlayerActivity extends BaseActivity implements QuizPlayFragment.QuizPlayListener {
     private String key;
-    private RealmResults<QuestionBank> mList;
 
     private static final long MOVE_DEFAULT_TIME = 5;
     private static final long FADE_DEFAULT_TIME = 1;
@@ -35,51 +32,49 @@ public class PlayerActivity extends BaseActivity implements QuizPlayFragment.Qui
 
     private Handler mDelayedTransactionHandler = new Handler();
     private Runnable mRunnable = this::performTransition;
+    private Runnable mRunnableBack = this::onBack;
+
+    PojoModel pojoModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
-        ButterKnife.bind(this);
+        bind(this);
 
         key = getIntent().getStringExtra(KEY_QUESTION_BANK_ID);
         this.Init();
     }
 
     private void Init() {
-        RealmResults<QuestionBank> mList = RealmManager.getInstance().getQuestionBanks();
-
-        //TODO
+        //TODO set data
+        QuizBank mData = RealmManager.getInstance().getQuestionBank(key);
+        pojoModel = new PojoModel(mData);
         mFragmentManager = getSupportFragmentManager();
-
         loadInitialFragment();
     }
 
-    private void loadInitialFragment()
-    {
+    private void loadInitialFragment() {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, getNewQuiz());
         fragmentTransaction.commit();
     }
-int i=0;
+
     private Fragment getNewQuiz() {
         QuizPlayFragment initialFragment = QuizPlayFragment.newInstance();
-        initialFragment.init(i++ +"");
+        initialFragment.bind(pojoModel);
         initialFragment.setListener(this);
         return initialFragment;
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
         mDelayedTransactionHandler.removeCallbacks(mRunnable);
     }
 
-    private void performTransition()
-    {
-        if (isDestroyed())
-        {
+    private void performTransition() {
+        if (isDestroyed()) {
             return;
         }
         Fragment previousFragment = mFragmentManager.findFragmentById(R.id.fragment_container);
@@ -117,7 +112,7 @@ int i=0;
 
     private void back(Integer rightNum, Integer score) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(Utils.KEY_RETURN_SCORE , rightNum.toString() + "#" + score.toString());
+        returnIntent.putExtra(Utils.KEY_RETURN_SCORE, rightNum.toString() + "#" + score.toString());
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
@@ -126,4 +121,16 @@ int i=0;
     public void gotoNext() {
         mDelayedTransactionHandler.postDelayed(mRunnable, 1);
     }
+
+    @Override
+    public void gotoFinish() {
+        mDelayedTransactionHandler.postDelayed(mRunnableBack, 1);
+    }
+    private void onBack() {
+        if (isDestroyed()) {
+            return;
+        }
+        back(pojoModel.getRightQzs(),pojoModel.getFalseQzs());
+    }
+
 }

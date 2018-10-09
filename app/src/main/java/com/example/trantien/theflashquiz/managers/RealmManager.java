@@ -2,7 +2,7 @@ package com.example.trantien.theflashquiz.managers;
 
 import android.util.Log;
 
-import com.example.trantien.theflashquiz.mvc.models.QuestionBank;
+import com.example.trantien.theflashquiz.mvc.models.QuizBank;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -41,20 +41,20 @@ public class RealmManager {
     public void clearAll() {
 
 //        realm.beginTransaction();
-//        realm.clear(QuestionBank.class);
+//        realm.clear(QuizBank.class);
 //        realm.commitTransaction();
     }
 
 
     //find all objects in the Book.class
-    public RealmResults<QuestionBank> getQuestionBanks() {
-        return realm.where(QuestionBank.class).findAll();
+    public RealmResults<QuizBank> getQuestionBanks() {
+        return realm.where(QuizBank.class).findAll();
     }
 
     //query a single item with the given id
-    public QuestionBank getQuestionBank(String id) {
+    public QuizBank getQuestionBank(String id) {
 
-        return realm.where(QuestionBank.class).equalTo("id", id).findFirst();
+        return realm.where(QuizBank.class).equalTo("id", id).findFirst();
     }
 
 
@@ -69,17 +69,17 @@ public class RealmManager {
 //
 //    }
 
-    public void addQuestionBank(QuestionBank questionBank){
+    public void addQuestionBank(QuizBank quizBank){
         try {
             realm.beginTransaction();
-            realm.insertOrUpdate(questionBank);
+            realm.insertOrUpdate(quizBank);
             realm.commitTransaction();
         }catch (Exception e){
             Log.d("ADD REALM ERROR", e.getMessage());
             realm.beginTransaction();
-             RealmResults <QuestionBank> questionBank1 = realm.where(QuestionBank.class).findAll();
-            questionBank1.deleteAllFromRealm();
-            realm.insertOrUpdate(questionBank);
+             RealmResults <QuizBank> quizBank1 = realm.where(QuizBank.class).findAll();
+            quizBank1.deleteAllFromRealm();
+            realm.insertOrUpdate(quizBank);
             realm.commitTransaction();
         }
 

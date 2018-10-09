@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Zuka on 10/2/18.
  */
-public class Question extends RealmObject {
+public class QuizModel extends RealmObject {
     @PrimaryKey
     private String id;
     private String question;
@@ -16,10 +16,10 @@ public class Question extends RealmObject {
     private String ans4;
     private int rightAns;
 
-    public Question() {
+    public QuizModel() {
     }
 
-    public Question(String id, String question, int rightAns, String ans1, String ans2, String ans3, String ans4) {
+    public QuizModel(String id, String question, int rightAns, String ans1, String ans2, String ans3, String ans4) {
         this.id = id;
         this.question = question;
         this.rightAns = rightAns;
@@ -110,8 +110,8 @@ public class Question extends RealmObject {
             return this;
         }
 
-        public Question create() {
-            return new Question(id, question, rightAns, ans1, ans2, ans3, ans4);
+        public QuizModel create() {
+            return new QuizModel(id, question, rightAns, ans1, ans2, ans3, ans4);
         }
     }
 

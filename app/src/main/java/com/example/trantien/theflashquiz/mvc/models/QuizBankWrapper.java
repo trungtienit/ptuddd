@@ -10,24 +10,24 @@ import io.realm.RealmList;
 /**
  * Created by Zuka on 10/2/18.
  */
-public class QuestionBankWrapper {
-    public static List<QuestionBank> questionBanks;
-    public static List<QuestionBank> getAllQuestionBank(){
-        if(questionBanks ==null){
-            questionBanks = new ArrayList<>();
-            questionBanks.add(new QuestionBank.Builder()
+public class QuizBankWrapper {
+    public static List<QuizBank> quizBanks;
+    public static List<QuizBank> getAllQuestionBank(){
+        if(quizBanks ==null){
+            quizBanks = new ArrayList<>();
+            quizBanks.add(new QuizBank.Builder()
                     .Questions(getQuestion1())
                     .Id("F"+Utils.COUNT_FOLDER++)
                     .Owner("Admin")
                     .Topic("Album1")
                     .create());
-            questionBanks.add(new QuestionBank.Builder()
+            quizBanks.add(new QuizBank.Builder()
                     .Questions(getQuestion1())
                     .Id("F"+Utils.COUNT_FOLDER++)
                     .Owner("Admin")
                     .Topic("Album2")
                     .create());
-            questionBanks.add(new QuestionBank.Builder()
+            quizBanks.add(new QuizBank.Builder()
                     .Questions(getQuestion1())
                     .Id("F"+Utils.COUNT_FOLDER++)
                     .Owner("Admin")
@@ -35,12 +35,12 @@ public class QuestionBankWrapper {
                     .create());
 
         }
-        return questionBanks;
+        return quizBanks;
     }
 
-    public static RealmList<Question> getQuestion1() {
+    public static RealmList<QuizModel> getQuestion1() {
         RealmList mList = new RealmList();
-        mList.add(new Question.Builder()
+        mList.add(new QuizModel.Builder()
                 .Id("Q"+Utils.COUNT_QUESTION++)
                 .Question("Hôm nay là thứ mấy?")
                 .Ans1("2")
@@ -50,7 +50,7 @@ public class QuestionBankWrapper {
                 .Rightans(1)
                 .create()
         );
-        mList.add(new Question.Builder()
+        mList.add(new QuizModel.Builder()
                 .Id("Q"+Utils.COUNT_QUESTION++)
                 .Question("Hôm nay là ngày mấy?")
                 .Ans1("2")
@@ -60,7 +60,7 @@ public class QuestionBankWrapper {
                 .Rightans(2)
                 .create()
         );
-        mList.add(new Question.Builder()
+        mList.add(new QuizModel.Builder()
                 .Id("Q"+Utils.COUNT_QUESTION++)
                 .Question("Hôm nay là tháng mấy?")
                 .Ans1("2")
@@ -70,7 +70,7 @@ public class QuestionBankWrapper {
                 .Rightans(3)
                 .create()
         );
-        mList.add(new Question.Builder()
+        mList.add(new QuizModel.Builder()
                 .Id("Q"+Utils.COUNT_QUESTION++)
                 .Question("Hôm nay là tháng mấy?")
                 .Ans1("2")
@@ -80,7 +80,7 @@ public class QuestionBankWrapper {
                 .Rightans(4)
                 .create()
         );
-        mList.add(new Question.Builder()
+        mList.add(new QuizModel.Builder()
                 .Id("Q"+Utils.COUNT_QUESTION++)
                 .Question("Hôm nay là tuần mấy?")
                 .Ans1("1")
@@ -90,7 +90,7 @@ public class QuestionBankWrapper {
                 .Rightans(2)
                 .create()
         );
-        mList.add(new Question.Builder()
+        mList.add(new QuizModel.Builder()
                 .Id("Q"+Utils.COUNT_QUESTION++)
                 .Question("Hôm nay là năm bao nhiêu?")
                 .Ans1("2000")

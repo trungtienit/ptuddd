@@ -32,7 +32,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name="MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +43,8 @@
         <activity android:name=".mvc.controllers.HomeActivity" />
         <activity android:name=".mvc.controllers.SplashActivity" />
         <activity android:name=".mvc.controllers.PlayerActivity" />
-        <activity android:name=".mvc.controllers.RoomChatActivity"></activity>
+        <activity android:name=".mvc.controllers.RoomChatActivity" />
+        <activity android:name=".mvc.controllers.DrawerActivity"></activity>
     </application>
 
 </manifest>
