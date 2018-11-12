@@ -2,7 +2,6 @@ package com.example.trantien.theflashquiz.mvc.controllers;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +121,6 @@ public class QuizPlayFragment extends Fragment{
             }
         }
     };
-
 
 
     public void checkResult(ViewGroup view) {

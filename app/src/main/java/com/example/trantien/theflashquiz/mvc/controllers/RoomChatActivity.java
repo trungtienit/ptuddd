@@ -83,33 +83,10 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
     }
 
     private void init() {
-        //RecyclerView mRecyclerView_roomChat = findViewById(R.id.recycler_view);
         btnStart.setEnabled(false);
         btnStart.setOnClickListener(this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        /*mRecyclerView_roomChat.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        mRecyclerView_roomChat.setLayoutManager(layoutManager);
-
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView_roomChat.getContext(),DividerItemDecoration.VERTICAL);
-        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.custom_divider);
-        dividerItemDecoration.setDrawable(drawable);
-        mRecyclerView_roomChat.addItemDecoration(dividerItemDecoration);
-
-        ArrayList<dataRoom> rooms = new ArrayList<>();
-        rooms.add(new dataRoom("Room1","123456",2,0));
-        rooms.add(new dataRoom("Room2","123456",2,0));
-        rooms.add(new dataRoom("Room3","123456",2,0));
-        rooms.add(new dataRoom("Room4","123456",2,0));
-        rooms.add(new dataRoom("Room5","123456",2,0));
-        rooms.add(new dataRoom("Room6","123456",2,0));
-        rooms.add(new dataRoom("Room7","123456",2,0));
-        rooms.add(new dataRoom("Room8","123456",2,0));
-        rooms.add(new dataRoom("Room9","123456",2,0));
-        RoomChatAdapter roomChatAdapter = new RoomChatAdapter(rooms,getApplicationContext());
-        mRecyclerView_roomChat.setAdapter(roomChatAdapter);*/
-
         chatAdapter = new ChatAdapter(this, mModel.getMessages());
         mRecyclerView.setAdapter(chatAdapter);
         mRecyclerView.scrollToPosition(mModel.getMessages().size() - 1);
