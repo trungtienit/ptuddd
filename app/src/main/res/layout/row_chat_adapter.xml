@@ -34,7 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_average"
             android:layout_marginTop="@dimen/margin_average"
-            style="@style/info_textviews"/>
+            style="@style/info_textviews"
+            android:textColor="@color/text_color"
+            android:text="12:00"
+            android:textSize="10dp"/>
 
     </LinearLayout>
 
@@ -52,7 +55,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_large"
             android:layout_marginRight="@dimen/margin_average"
-            style="@style/info_textviews"/>
+            style="@style/info_textviews"
+            android:textColor="@color/text_color"
+            android:text="12:00"
+            android:textSize="10dp" />
 
 
         <LinearLayout

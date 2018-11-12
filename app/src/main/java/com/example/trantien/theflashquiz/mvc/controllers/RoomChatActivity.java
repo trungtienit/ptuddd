@@ -22,8 +22,8 @@ import butterknife.BindView;
 
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_NEW;
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_QUESTION_BANK_ID;
-import static com.example.trantien.theflashquiz.utils.Utils.KEY_ROOM_ID;
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_RETURN_SCORE;
+import static com.example.trantien.theflashquiz.utils.Utils.KEY_ROOM_ID;
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_TYPE_ROOM;
 import static com.example.trantien.theflashquiz.utils.Utils.QUESTION_BANK;
 import static com.example.trantien.theflashquiz.utils.Utils.REQUEST_SCORE;
@@ -36,6 +36,7 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
 
     @BindView(R.id.btn_start)
     Button btnStart;
@@ -63,7 +64,6 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
             //send question bank id
             sendMessageToFirebase(createNewRoomWith(mKeyId));
         }
-
         sendMessageToFirebase("Hello");
         mModel = new MessageModel(this);
 
@@ -83,10 +83,32 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
     }
 
     private void init() {
+        //RecyclerView mRecyclerView_roomChat = findViewById(R.id.recycler_view);
         btnStart.setEnabled(false);
         btnStart.setOnClickListener(this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        /*mRecyclerView_roomChat.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mRecyclerView_roomChat.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView_roomChat.getContext(),DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(),R.drawable.custom_divider);
+        dividerItemDecoration.setDrawable(drawable);
+        mRecyclerView_roomChat.addItemDecoration(dividerItemDecoration);
+
+        ArrayList<dataRoom> rooms = new ArrayList<>();
+        rooms.add(new dataRoom("Room1","123456",2,0));
+        rooms.add(new dataRoom("Room2","123456",2,0));
+        rooms.add(new dataRoom("Room3","123456",2,0));
+        rooms.add(new dataRoom("Room4","123456",2,0));
+        rooms.add(new dataRoom("Room5","123456",2,0));
+        rooms.add(new dataRoom("Room6","123456",2,0));
+        rooms.add(new dataRoom("Room7","123456",2,0));
+        rooms.add(new dataRoom("Room8","123456",2,0));
+        rooms.add(new dataRoom("Room9","123456",2,0));
+        RoomChatAdapter roomChatAdapter = new RoomChatAdapter(rooms,getApplicationContext());
+        mRecyclerView_roomChat.setAdapter(roomChatAdapter);*/
 
         chatAdapter = new ChatAdapter(this, mModel.getMessages());
         mRecyclerView.setAdapter(chatAdapter);

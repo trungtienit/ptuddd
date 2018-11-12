@@ -25,4 +25,12 @@
     <color name="black">#000000</color>
     <color name="White">#fff</color>
 
+    <color name="graylight">#fafafa</color>
+    <color name="startblue">#09c6df</color>
+    <color name="endblue">#0bcce6</color>
+    <color name="red1">#ff3333</color>
+    <color name="blue">#0000ff</color>
+    <color name="green1">#00CC00</color>
+
+
 </resources>

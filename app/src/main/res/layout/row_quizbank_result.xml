@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/layout_pick_topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:orientation="horizontal">
+        <ImageView android:src="@drawable/icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="190dp"/>
+
+        <ImageView
+            android:layout_width="@dimen/margin_average"
+            android:layout_height="@dimen/margin_average"
+            android:layout_marginTop="205dp"
+            android:src="@drawable/grey_node" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/left_node_bg">
+
+            <ImageView
+                android:id="@+id/image_pick_topic"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:background="@drawable/topic_1"
+                android:orientation="vertical" />
+            <TextView android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/text_color"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/left_node_bg">
+            <TextView
+                android:layout_marginLeft="40dp"
+                android:id="@+id/text_pick_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="you choice F0"
+                android:textSize="17dp"
+                android:textStyle="bold"/>
+            <ImageView android:src="@drawable/icon1"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="37dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_time_pick_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_average"
+            android:layout_marginTop="210dp"
+            android:textColor="@color/text_color"
+            android:text="12:00"
+            android:textSize="10dp"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

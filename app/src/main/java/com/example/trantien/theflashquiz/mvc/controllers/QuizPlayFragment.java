@@ -2,6 +2,7 @@ package com.example.trantien.theflashquiz.mvc.controllers;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class QuizPlayFragment extends Fragment {
+public class QuizPlayFragment extends Fragment{
     protected boolean _active = false;
     protected boolean isPressed = false;
 
