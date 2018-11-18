@@ -6,13 +6,6 @@
     android:orientation="vertical"
     tools:context=".mvc.controllers.RoomChatActivity">
 
-    <TextView
-        android:id="@+id/text_header"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/standard_small"
-        android:text="@string/room_heading"
-        style="@style/activity_headers"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

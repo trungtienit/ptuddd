@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">TheFlashQuiz</string>
+    <string name="app_name">tQuiz</string>
     <string name="facebook_app_id">759224067743011</string>
     <string name="fb_login_protocol_scheme">fb759224067743011</string>
 
     <string name="loading">Loading…</string>
-    <string name="txt_splash">IT\\\'S TIME TO QUIZ !</string>
+    <string name="txt_splash">Just a moment!</string>
     <string name="chats_heading">Messages</string>
     <string name="hint_typing">Type here</string>
     <string name="send_text">Send</string>
@@ -18,7 +18,7 @@
     <string name="create_room_label">Create room</string>
     <string name="existing_room_label">Enter existing</string>
     <string name="room_dialog_heading">Enter room name</string>
-    <string name="dialog_room_info">Tien dep trai</string>
+    <string name="dialog_room_info">Enter the name of the room you want to join.</string>
     <string name="hint_room_name">room here</string>
     <string name="text_submit">Submit</string>
     <string name="start_text">Start</string>

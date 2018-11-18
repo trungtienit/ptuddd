@@ -9,9 +9,9 @@
 
     <RelativeLayout
         android:id="@+id/relTop"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/one_fifty_dimen"
-        android:background="@drawable/top">
+        android:background="@drawable/bg_gradient">
 
         <TextView
             android:id="@+id/txtLevel"
@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_average"
-            android:text="Ghi gi do "
             android:textColor="@color/white"
             android:textSize="@dimen/small_font_size" />
 

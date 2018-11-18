@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -53,6 +54,13 @@ public class DrawerActivity extends BaseActivity implements NavigationView.OnNav
         tvMail = navigationView.getHeaderView(0).findViewById(R.id.tv_email);
 
         navigationView.setNavigationItemSelectedListener(this);
+        imvAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ProFileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void addContentView(int layoutResID) {

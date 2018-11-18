@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_panorama"
     android:orientation="vertical"
     tools:context=".mvc.controllers.HomeActivity">
 
+    <com.gjiazhe.panoramaimageview.PanoramaImageView
+        android:id="@+id/panorama_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_panorama"
+        app:piv_enablePanoramaMode="true"
+        app:piv_invertScrollDirection="false"
+        app:piv_show_scrollbar="false" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_create_room"
-            android:layout_width="@dimen/button_width_default"
+            style="@style/regular_buttons"
+            android:background="#99e1dde4"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/button_height_default"
             android:layout_margin="@dimen/margin_extra_large"
-            android:text="@string/create_room_label"
             android:padding="@dimen/padding_small"
-            style="@style/regular_buttons"/>
+            android:textColor="#31103d"
+            android:textSize="24sp"
+            android:text="@string/create_room_label" />
 
         <Button
             android:id="@+id/btn_find_room"
+            style="@style/regular_buttons"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/button_height_default"
-            android:layout_width="@dimen/button_width_default"
             android:layout_margin="@dimen/margin_extra_large"
-            android:text="@string/existing_room_label"
+            android:background="#99e1dde4"
+            android:textStyle="bold"
             android:padding="@dimen/padding_small"
-
-            style="@style/regular_buttons"/>
+            android:textSize="24sp"
+            android:text="@string/existing_room_label"
+            android:textColor="#31103d" />
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

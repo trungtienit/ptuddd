@@ -14,17 +14,8 @@ public class ProFileActivity extends Activity {
     @BindView(R.id.text_name)
     TextView textViewName;
 
-    @BindView(R.id.text_email)
+    @BindView(R.id.tv_email)
     TextView textViewEmail;
-
-    @BindView(R.id.text_phone)
-    TextView textViewPhone;
-
-    @BindView(R.id.text_google)
-    TextView textViewGoogle;
-
-    @BindView(R.id.text_facebook)
-    TextView textViewFace;
 
     @BindView(R.id.text_best_score)
     TextView textViewBestCore;
