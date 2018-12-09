@@ -8,16 +8,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/topBar"
             app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="30dp"
             android:background="@color/colorPrimary"
             android:contentInsetEnd="0dp"
             android:contentInsetLeft="0dp"
@@ -26,7 +27,18 @@
 
             <include layout="@layout/layout_toolbar_back" />
         </android.support.v7.widget.Toolbar>
-
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="gone"
+            android:backgroundTint="@color/white"
+            android:layout_below="@+id/framelauout"
+            android:indeterminateTint="#d60924"
+            android:layout_marginTop="-7dp"/>
         <FrameLayout
             android:id="@+id/layout_container"
             android:layout_width="match_parent"

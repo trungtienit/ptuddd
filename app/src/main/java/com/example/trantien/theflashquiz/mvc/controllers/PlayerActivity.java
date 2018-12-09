@@ -12,6 +12,7 @@ import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
 
 import com.example.trantien.theflashquiz.R;
+import com.example.trantien.theflashquiz.managers.Prefs;
 import com.example.trantien.theflashquiz.managers.RealmManager;
 import com.example.trantien.theflashquiz.mvc.models.PojoModel;
 import com.example.trantien.theflashquiz.mvc.models.QuizBank;
@@ -22,7 +23,7 @@ import static com.example.trantien.theflashquiz.utils.Utils.KEY_QUESTION_BANK_ID
 /**
  * Created by Zuka on 9/18/18.
  */
-public class PlayerActivity extends BaseActivity implements QuizPlayFragment.QuizPlayListener {
+public class PlayerActivity extends BaseActivity implements QuizPlayFragment.QuizPlayListener, BaseActivity.BackListener {
     private String key;
 
     private static final long MOVE_DEFAULT_TIME = 5;
@@ -94,7 +95,7 @@ public class PlayerActivity extends BaseActivity implements QuizPlayFragment.Qui
         enterTransitionSet.setStartDelay(FADE_DEFAULT_TIME);
         nextFragment.setSharedElementEnterTransition(enterTransitionSet);
 
-        // 3. Enter Transition for New Fragment
+        // 3. Enter Transition for New FPragment
         Fade enterFade = new Fade();
         enterFade.setStartDelay(MOVE_DEFAULT_TIME + FADE_DEFAULT_TIME);
         enterFade.setDuration(FADE_DEFAULT_TIME);
@@ -107,12 +108,16 @@ public class PlayerActivity extends BaseActivity implements QuizPlayFragment.Qui
 
     @Override
     public void onBackPressed() {
-        back(0, 0);
+        setBackListener(this);
+        showBackConfirmDialog();
+
     }
 
-    private void back(Integer rightNum, Integer score) {
+    private void back() {
+        Prefs.with(this).updateCount();
+        Prefs.with(this).updateScore(pojoModel.getRightQzs());
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(Utils.KEY_RETURN_SCORE, rightNum.toString() + "#" + score.toString());
+        returnIntent.putExtra(Utils.KEY_RETURN_SCORE, pojoModel.getRightQzs().toString() + "#" + pojoModel.getData().getQuizModels().size());
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
@@ -126,11 +131,16 @@ public class PlayerActivity extends BaseActivity implements QuizPlayFragment.Qui
     public void gotoFinish() {
         mDelayedTransactionHandler.postDelayed(mRunnableBack, 1);
     }
+
     private void onBack() {
         if (isDestroyed()) {
             return;
         }
-        back(pojoModel.getRightQzs(),pojoModel.getFalseQzs());
+        back();
     }
 
+    @Override
+    public void onYesClicked() {
+        back();
+    }
 }

@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.example.trantien.theflashquiz.R;
@@ -21,6 +22,8 @@ import com.example.trantien.theflashquiz.mvc.models.QuizBankWrapper;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.gjiazhe.panoramaimageview.GyroscopeObserver;
+import com.gjiazhe.panoramaimageview.PanoramaImageView;
 
 import org.json.JSONObject;
 
@@ -55,12 +58,18 @@ public class HomeActivity extends DrawerActivity implements View.OnClickListener
     ArrayList<String> mItems;
 
     private RealmManager mRealm;
+    private GyroscopeObserver gyroscopeObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         addContentView(R.layout.activity_home);
         super.onCreate(savedInstanceState);
-        setTitle("HIHI");
+        gyroscopeObserver = new GyroscopeObserver();
+        gyroscopeObserver.setMaxRotateRadian(Math.PI/9);
+        PanoramaImageView panoramaImageView = (PanoramaImageView) findViewById(R.id.panorama_image_view);
+        panoramaImageView.setGyroscopeObserver(gyroscopeObserver);
+
+        setTitle("tQuiz");
         btnCreateRoom.setOnClickListener(this);
         btnFindRoom.setOnClickListener(this);
         Intent intent = getIntent();
@@ -164,6 +173,10 @@ public class HomeActivity extends DrawerActivity implements View.OnClickListener
                             String email = object.optString(getString(R.string.email));
                             URL imageURL = extractFacebookIcon(id);
 
+
+                            Prefs.with(getBaseContext()).setEmail(email);
+                            Prefs.with(getBaseContext()).setName(name);
+                            Prefs.with(getBaseContext()).setURL(imageURL.toString());
                             updateInfor(imageURL.toString(), name, email);
 
                             hideProgressDialog();
@@ -220,4 +233,18 @@ public class HomeActivity extends DrawerActivity implements View.OnClickListener
                 return;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gyroscopeObserver.register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gyroscopeObserver.unregister();
+    }
+
+
 }

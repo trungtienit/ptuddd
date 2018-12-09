@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="white80">#80FFFFFF</color>
     <color name="list_divider_color">#87d9ff</color>
     <color name="app_theme_color">#7045dc</color>
     <color name="app_background_color_1">#5134bf</color>

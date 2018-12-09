@@ -29,4 +29,5 @@
     <dimen name="dmn_2dp">2dp</dimen>
     <dimen name="minus_twelve_margin">-12dp</dimen>
     <dimen name="list_divider_hight">0.5dp</dimen>
+    <dimen name="button_width_large">150dp</dimen>
 </resources>

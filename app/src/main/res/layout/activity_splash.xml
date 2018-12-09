@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_home_layout"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg_gradient">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="180dp"
@@ -13,18 +16,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:src="@drawable/icon_default" />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50px"
         android:id="@+id/ll_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
-        android:layout_marginTop="50px"
-        android:gravity="center">
-        <com.victor.loading.newton.NewtonCradleLoading
-            android:id="@+id/newton_cradle_loading"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/loading_view"
             android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:indicatorName="BallPulseIndicator" />
     </LinearLayout>
 
     <TextView
@@ -36,7 +42,9 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:id="@+id/txtText"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:textSize="30sp"/>
 </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
 

@@ -1,11 +1,17 @@
 package com.example.trantien.theflashquiz.mvc.controllers;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.example.trantien.theflashquiz.R;
 import com.example.trantien.theflashquiz.interfaces.FirebaseCallBacks;
@@ -14,6 +20,7 @@ import com.example.trantien.theflashquiz.managers.FirebaseManager;
 import com.example.trantien.theflashquiz.mvc.models.MessageModel;
 import com.example.trantien.theflashquiz.mvc.views.ChatAdapter;
 import com.example.trantien.theflashquiz.utils.Utils;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.HashMap;
@@ -32,14 +39,26 @@ import static com.example.trantien.theflashquiz.utils.Utils.createNewRoomWith;
 /**
  * Created by Zuka on 9/18/18.
  */
-public class RoomChatActivity extends DrawerActivity implements MessageCallBacks, FirebaseCallBacks, View.OnClickListener {
+public class RoomChatActivity extends DrawerActivity implements MessageCallBacks, FirebaseCallBacks, View.OnClickListener, BaseActivity.BackListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-
     @BindView(R.id.btn_start)
     Button btnStart;
+
+    @BindView(R.id.btn_send)
+    ImageButton btnSend;
+
+    @BindView(R.id.edt_message)
+    EditText edtMessage;
+
+    @BindView(R.id.llMessage)
+    LinearLayout llMessage;
+
+    @BindView(R.id.myFoat)
+    FloatingActionMenu myFoat;
+
 
     private String mRoomName;
     private String mKeyId;
@@ -52,22 +71,27 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
     protected void onCreate(Bundle savedInstanceState) {
         addContentView(R.layout.activity_room_chat);
         super.onCreate(savedInstanceState);
-
+        showLoading();
         bind(this);
-
         String key = getIntent().getExtras().getString(KEY_TYPE_ROOM);
         mRoomName = getIntent().getExtras().getString(KEY_ROOM_ID);
         mKeyId = getIntent().getExtras().getString(KEY_QUESTION_BANK_ID);
-
+        setTitle("tQuiz");
         setListener(mRoomName);
         if (key.equals(KEY_NEW)) {
             //send question bank id
             sendMessageToFirebase(createNewRoomWith(mKeyId));
         }
-        sendMessageToFirebase("Hello");
         mModel = new MessageModel(this);
 
         this.init();
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        hideLoading();
+                        sendMessageToFirebase("Hi");
+                    }
+                }, 5000);
     }
 
     @Override
@@ -77,7 +101,15 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
                 Intent intent = new Intent(getApplicationContext(), PlayerActivity.class);
                 intent.putExtra(KEY_QUESTION_BANK_ID, currentID);
                 startActivityForResult(intent, REQUEST_SCORE);
-                //sendMessageToFirebase(mRoomName,mEdittextChat.getText().toString());
+                break;
+            case R.id.btn_send:
+                sendMessageToFirebase(edtMessage.getText().toString());
+                edtMessage.setText("");
+                View view = this.getCurrentFocus();
+                if (view != null) {
+                    hideKeyboard(view);
+                }
+
                 break;
         }
     }
@@ -85,16 +117,19 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
     private void init() {
         btnStart.setEnabled(false);
         btnStart.setOnClickListener(this);
-
+        edtMessage.setOnClickListener(this);
+        btnSend.setOnClickListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatAdapter = new ChatAdapter(this, mModel.getMessages());
         mRecyclerView.setAdapter(chatAdapter);
         mRecyclerView.scrollToPosition(mModel.getMessages().size() - 1);
+
     }
 
     @Override
     public void onBackPressed() {
-        return;
+        setBackListener(this);
+        showBackConfirmDialog();
     }
 
     @Override
@@ -113,6 +148,8 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
     @Override
     public void onModelUpdated() {
         chatAdapter.notifyDataSetChanged();
+        mRecyclerView.smoothScrollToPosition(chatAdapter.getItemCount() - 1);
+
     }
 
     public void sendMessageToFirebase(String message) {
@@ -141,5 +178,23 @@ public class RoomChatActivity extends DrawerActivity implements MessageCallBacks
                 sendMessageToFirebase(Utils.sendMyResult(data.getStringExtra(KEY_RETURN_SCORE)));
             }
         }
+    }
+
+    public void openChat(View view) {
+        llMessage.setVisibility(View.VISIBLE);
+        btnStart.setVisibility(View.GONE);
+        myFoat.toggle(true);
+    }
+
+    public void openPlay(View view) {
+        llMessage.setVisibility(View.GONE);
+        btnStart.setVisibility(View.VISIBLE);
+        myFoat.toggle(true);
+    }
+
+    @Override
+    public void onYesClicked() {
+        finish();
+        super.onBackPressed();
     }
 }

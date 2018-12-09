@@ -9,19 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.trantien.theflashquiz.R;
 import com.example.trantien.theflashquiz.mvc.models.ChatModel;
-import com.example.trantien.theflashquiz.mvc.models.QuizBank;
-import com.example.trantien.theflashquiz.mvc.models.QuizBankWrapper;
 import com.example.trantien.theflashquiz.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.trantien.theflashquiz.mvc.models.ChatModel.MessageType.NOTICE_FOLDER;
 import static com.example.trantien.theflashquiz.mvc.models.ChatModel.MessageType.NOTICE_SCORE;
@@ -111,22 +107,36 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     break;
                 case 2:
                     String[] strs = object.getMessage().substring(Utils.KEY_RETURN_SCORE.length()).split("#");
-
+                    int t = Integer.parseInt(strs[0]);
+                    int s = Integer.parseInt(strs[1]) == 0 ? 1 : Integer.parseInt(strs[1]);
                     if (chatList.get(position).getSenderId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
 
                         ((ScoreViewHolder) holder).layoutLeftMessages.setVisibility(View.GONE);
                         ((ScoreViewHolder) holder).layoutRightMessages.setVisibility(View.VISIBLE);
 
-                        ((ScoreViewHolder) holder).result_correct_right.setText(strs[0]);
-                        ((ScoreViewHolder) holder).result_uncorrect_right.setText(strs[1]);
+                        ((ScoreViewHolder) holder).result_correct_right.setText("Correct:" + t);
+                        ((ScoreViewHolder) holder).result_uncorrect_right.setText("Sum:" + s);
                         ((ScoreViewHolder) holder).timeMessagesRight.setText(Utils.convertTime(chatList.get(position).getTimeStamp()));
+                        if (t * 10 / s > 8) {
+                            ((ScoreViewHolder) holder).nameR.setText("Bạn thật sự may mắn");
+                        } else if (t * 10 / s > 5) {
+                            ((ScoreViewHolder) holder).nameR.setText("Sự cố gắng của bạn đã được ghi nhận");
+                        } else {
+                            ((ScoreViewHolder) holder).nameR.setText("Quá tệ");
+                        }
 
                     } else {
                         ((ScoreViewHolder) holder).layoutLeftMessages.setVisibility(View.VISIBLE);
                         ((ScoreViewHolder) holder).layoutRightMessages.setVisibility(View.GONE);
-                        ((ScoreViewHolder) holder).result_correct_left.setText(strs[0]);
-                        ((ScoreViewHolder) holder).result_uncorrect_left.setText(strs[1]);
-
+                        ((ScoreViewHolder) holder).result_correct_left.setText("Correct:" + t);
+                        ((ScoreViewHolder) holder).result_uncorrect_left.setText("Sum:" + s);
+                        if (t * 10 / s > 8) {
+                            ((ScoreViewHolder) holder).nameL.setText("Bạn thật sự may mắn");
+                        } else if (t * 10 / s > 5) {
+                            ((ScoreViewHolder) holder).nameL.setText("Sự cố gắng của bạn đã được ghi nhận");
+                        } else {
+                            ((ScoreViewHolder) holder).nameL.setText("Quá tệ!");
+                        }
                         ((ScoreViewHolder) holder).timeMessagesLeft.setText(Utils.convertTime(chatList.get(position).getTimeStamp()));
                     }
 
@@ -160,8 +170,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class ScoreViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView result_correct_left, result_uncorrect_left,result_correct_right,result_uncorrect_right,timeMessagesLeft, timeMessagesRight;
+        private TextView nameL, nameR, result_correct_left, result_uncorrect_left, result_correct_right, result_uncorrect_right, timeMessagesLeft, timeMessagesRight;
         private LinearLayout layoutLeftMessages, layoutRightMessages;
 
         ScoreViewHolder(View convertView) {
@@ -172,23 +181,26 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             result_correct_right = convertView.findViewById(R.id.result_correct_right);
             result_uncorrect_right = convertView.findViewById(R.id.result_uncorrect_right);
 
-            layoutLeftMessages = convertView.findViewById(R.id.layout_message_left);
-            layoutRightMessages = convertView.findViewById(R.id.layout_message_right);
+            layoutLeftMessages = convertView.findViewById(R.id.layout_messages_left);
+            layoutRightMessages = convertView.findViewById(R.id.layout_messages_right);
             timeMessagesLeft = convertView.findViewById(R.id.text_time_messages_left);
-            timeMessagesRight = convertView.findViewById(R.id.text_time_message_right);
+            timeMessagesRight = convertView.findViewById(R.id.text_time_messages_right);
+            nameL = convertView.findViewById(R.id.name_left);
+            nameR = convertView.findViewById(R.id.name_right);
         }
     }
 
     class BankViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtLeft,txtRight,timeMessagesLeft, timeMessagesRight;
+        private TextView txtLeft, txtRight, timeMessagesLeft, timeMessagesRight;
         private LinearLayout layoutLeftMessages, layoutRightMessages;
+
         BankViewHolder(View convertView) {
             super(convertView);
             txtLeft = convertView.findViewById(R.id.text_message_left);
             txtRight = convertView.findViewById(R.id.text_message_right);
             timeMessagesLeft = convertView.findViewById(R.id.text_time_messages_left);
-            timeMessagesRight = convertView.findViewById(R.id.text_time_message_right);
+            timeMessagesRight = convertView.findViewById(R.id.text_time_messages_right);
             layoutLeftMessages = convertView.findViewById(R.id.layout_message_left);
             layoutRightMessages = convertView.findViewById(R.id.layout_message_right);
         }

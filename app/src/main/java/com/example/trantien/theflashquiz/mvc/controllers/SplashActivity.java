@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.example.trantien.theflashquiz.R;
 import com.victor.loading.newton.NewtonCradleLoading;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.InputStream;
+
+import butterknife.BindView;
 
 import static com.example.trantien.theflashquiz.utils.Utils.KEY_TYPE_USER;
 
@@ -35,12 +38,8 @@ public class SplashActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         txtText = findViewById(R.id.txtText);
-
-        NewtonCradleLoading newtonCradleLoading;
-        newtonCradleLoading =findViewById(R.id.newton_cradle_loading);
-        newtonCradleLoading.start();
-        newtonCradleLoading.setLoadingColor(R.color.colorPrimary);
-
+        AVLoadingIndicatorView loading_view = (AVLoadingIndicatorView)findViewById(R.id.loading_view);
+        loading_view.show();
         Thread t = new Thread() {
             @Override
             public void run() {

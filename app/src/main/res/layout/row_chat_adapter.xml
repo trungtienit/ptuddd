@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/margin_small"
     android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/layout_message_left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
         android:orientation="horizontal">
         <ImageView android:src="@drawable/icon_default"
             android:layout_width="30dp"

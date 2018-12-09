@@ -17,88 +17,73 @@ public class QuizBankWrapper {
             quizBanks = new ArrayList<>();
             quizBanks.add(new QuizBank.Builder()
                     .Questions(getQuestion1())
-                    .Id("F"+Utils.COUNT_FOLDER++)
+                    .Id("Option"+Utils.COUNT_FOLDER++)
                     .Owner("Admin")
-                    .Topic("Album1")
+                    .Topic("Bộ câu hỏi A")
                     .create());
             quizBanks.add(new QuizBank.Builder()
-                    .Questions(getQuestion1())
-                    .Id("F"+Utils.COUNT_FOLDER++)
+                    .Questions(getQuestion2())
+                    .Id("Option"+Utils.COUNT_FOLDER++)
                     .Owner("Admin")
-                    .Topic("Album2")
+                    .Topic("Bộ câu hỏi B")
                     .create());
             quizBanks.add(new QuizBank.Builder()
-                    .Questions(getQuestion1())
-                    .Id("F"+Utils.COUNT_FOLDER++)
+                    .Questions(getQuestion3())
+                    .Id("Option"+Utils.COUNT_FOLDER++)
                     .Owner("Admin")
-                    .Topic("Album3")
+                    .Topic("Bộ câu hỏi C")
                     .create());
-
         }
         return quizBanks;
     }
 
     public static RealmList<QuizModel> getQuestion1() {
         RealmList mList = new RealmList();
-        mList.add(new QuizModel.Builder()
-                .Id("Q"+Utils.COUNT_QUESTION++)
-                .Question("Hôm nay là thứ mấy?")
-                .Ans1("2")
-                .Ans2("3")
-                .Ans3("4")
-                .Ans4("5")
-                .Rightans(1)
-                .create()
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Nước gì chỉ có đàn ông?")
+                .Ans1("Nước Anh").Ans2("Nước Việt Nam").Ans3("Nước Áo").Ans4("Nước Mĩ").Rightans(1).create()
         );
-        mList.add(new QuizModel.Builder()
-                .Id("Q"+Utils.COUNT_QUESTION++)
-                .Question("Hôm nay là ngày mấy?")
-                .Ans1("2")
-                .Ans2("3")
-                .Ans3("4")
-                .Ans4("5")
-                .Rightans(2)
-                .create()
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Trái gì sinh ra đã không nguyên vẹn?")
+                .Ans1("Trái chuối").Ans2("Trái cóc").Ans3("Trái măng cụt").Ans4("Trái cam").Rightans(3).create()
         );
-        mList.add(new QuizModel.Builder()
-                .Id("Q"+Utils.COUNT_QUESTION++)
-                .Question("Hôm nay là tháng mấy?")
-                .Ans1("2")
-                .Ans2("3")
-                .Ans3("4")
-                .Ans4("5")
-                .Rightans(3)
-                .create()
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Sữa gì không dùng để uống?")
+                .Ans1("Sữa voi").Ans2("Sữa mẹ").Ans3("Sữa Ông Thọ").Ans4("Sữa tắm").Rightans(4).create()
         );
-        mList.add(new QuizModel.Builder()
-                .Id("Q"+Utils.COUNT_QUESTION++)
-                .Question("Hôm nay là tháng mấy?")
-                .Ans1("2")
-                .Ans2("3")
-                .Ans3("4")
-                .Ans4("5")
-                .Rightans(4)
-                .create()
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Bán gì chỉ có một nửa?")
+                .Ans1("Bán rau").Ans2("Bán muối").Ans3("Bán hành").Ans4("Bán kính").Rightans(4).create()
         );
-        mList.add(new QuizModel.Builder()
-                .Id("Q"+Utils.COUNT_QUESTION++)
-                .Question("Hôm nay là tuần mấy?")
-                .Ans1("1")
-                .Ans2("2")
-                .Ans3("3")
-                .Ans4("4")
-                .Rightans(2)
-                .create()
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Đậu gì vô tình nhất?")
+                .Ans1("Đậu phụ").Ans2("Đậu phộng").Ans3("Đậu rồng").Ans4("Đậu xanh").Rightans(1).create()
         );
-        mList.add(new QuizModel.Builder()
-                .Id("Q"+Utils.COUNT_QUESTION++)
-                .Question("Hôm nay là năm bao nhiêu?")
-                .Ans1("2000")
-                .Ans2("3000")
-                .Ans3("4000")
-                .Ans4("5000")
-                .Rightans(1)
-                .create()
+
+        return mList;
+    }
+    public static RealmList<QuizModel> getQuestion2() {
+        RealmList mList = new RealmList();
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Trái gì biết nhảy?")
+                .Ans1("Nước Anh").Ans2("Nước Việt Nam").Ans3("Nước Áo").Ans4("Nước Mĩ").Rightans(1).create()
+        );
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Trái gì sinh ra đã không nguyên vẹn")
+                .Ans1("Trái chuối").Ans2("Trái cóc").Ans3("Trái măng cụt").Ans4("Trái cam").Rightans(3).create()
+        );
+
+        return mList;
+    }
+    public static RealmList<QuizModel> getQuestion3() {
+        RealmList mList = new RealmList();
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Nước gì chỉ có đàn ông?")
+                .Ans1("Nước Anh").Ans2("Nước Việt Nam").Ans3("Nước Áo").Ans4("Nước Mĩ").Rightans(1).create()
+        );
+        mList.add(new QuizModel.Builder().Id("Q"+Utils.COUNT_QUESTION++)
+                .Question("Trái gì sinh ra đã không nguyên vẹn")
+                .Ans1("Trái chuối").Ans2("Trái cóc").Ans3("Trái măng cụt").Ans4("Trái cam").Rightans(3).create()
         );
 
         return mList;

@@ -31,9 +31,10 @@
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height_default"
-            android:layout_margin="@dimen/margin_extra_large"
+            android:layout_marginStart="@dimen/margin_extra_large"
+            android:layout_marginEnd="@dimen/margin_extra_large"
             android:padding="@dimen/padding_small"
-            android:textColor="#31103d"
+            android:textColor="#e7083743"
             android:textSize="24sp"
             android:text="@string/create_room_label" />
 
@@ -48,6 +49,6 @@
             android:padding="@dimen/padding_small"
             android:textSize="24sp"
             android:text="@string/existing_room_label"
-            android:textColor="#31103d" />
+            android:textColor="#e7083743" />
     </LinearLayout>
 </FrameLayout>
